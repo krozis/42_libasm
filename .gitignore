@@ -1,0 +1,4 @@
+obj/
+libasm
+libasm.a
+*.o
