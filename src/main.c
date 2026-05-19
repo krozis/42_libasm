@@ -23,6 +23,13 @@ int main(void)
     printf(GREEN"ft_strcpy(dst, \"hello\")  = " RESET " %s " GREEN "| expected: " RESET "%s\n", ft_strcpy(dst1, "hello"),  strcpy(dst2, "hello"));
     printf(GREEN"ft_strcpy(dst, \"\")       = " RESET " %s " GREEN "| expected: " RESET "%s\n", ft_strcpy(dst1, ""),  strcpy(dst2, ""));
  
+    /*  ft_strcmp */
+    printf(YELLOW BOLD "\n=== ft_strcmp ===\n" RESET);
+    printf(GREEN"ft_strcmp(\"Hello\", \"Hello\")  = " RESET " %d " GREEN "| expected: " RESET "%d\n", ft_strcmp("Hello", "Hello"),  strcmp("Hello", "Hello"));
+    printf(GREEN"ft_strcmp(\"Hello\", \"World\")  = " RESET " %d " GREEN "| expected: " RESET "%d\n", ft_strcmp("Hello", "World"),  strcmp("Hello", "World"));
+    printf(GREEN"ft_strcmp(\"\")             = " RESET " %d " GREEN "| expected: " RESET "%d\n", ft_strcmp("", ""),  strcmp("", ""));
+    printf(GREEN"ft_strcmp(\"a\", \"\") = " RESET " %d " GREEN "| expected: " RESET "%d\n", ft_strcmp("a", ""), strcmp("a", ""));
+
     return 0;
 }
  

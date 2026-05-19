@@ -4,7 +4,8 @@ LIB = libasm.a
 # src files
 MAIN_SRC = src/main.c
 ASM_SRC = src/ft_strlen.s \
-			src/ft_strcpy.s
+			src/ft_strcpy.s \
+			src/ft_strcmp.s
 
 # object files
 OBJDIR = obj
