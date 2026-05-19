@@ -1,7 +1,7 @@
 global ft_strlen            ; make function ft_strlen visible from outside
 
 section .text
-ft_strlen:
+ft_strlen:                  ; One argument (s) will go to rdi
     mov     rax, 0          ; set rax (return value / counter) to zero
 
 .loop:

@@ -30,3 +30,10 @@ The goal is to create a static library `libasm.a` containing these functions, wh
 - The `-no-pie` flag is forbidden
 
 --------------
+
+## Misc.
+
+|  |  |
+|--|--|
+|"You must check for errors during syscalls and handle them properly when needed." | syscalls will be present for read, write, open and close |
+|  |  |

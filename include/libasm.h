@@ -3,6 +3,7 @@
 
 #include <stddef.h>  // for size_t
 
-size_t ft_strlen(const char *str);
+size_t  ft_strlen(const char *str);
+char    *ft_strcpy(char *dest, const char *src);
 
 #endif
