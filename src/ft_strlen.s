@@ -1,13 +1,14 @@
-global ft_strlen
+global ft_strlen            ; make function ft_strlen visible from outside
 
 section .text
 ft_strlen:
-    mov     rax, 0          ; Compteur = 0
+    mov     rax, 0          ; set rax (return value / counter) to zero
+
 .loop:
-    mov     dl, [rdi + rax] ; Charger le caractère à l'adresse (rdi + rax)
-    test    dl, dl          ; Est-ce le caractère nul ?
-    je      .done           ; Oui -> fin
-    inc     rax             ; Sinon, incrémenter le compteur
-    jmp     .loop
+    cmp byte [rdi+rax], 0   ; rdi[rax] == 0 ? (if yes, set ZF (Zero Flag) to 1)
+    je .done                ; if ZF, go to .done
+    inc rax                 ; rax++
+    jmp .loop               ; jump to .loop
+
 .done:
-    ret
+    ret                     ; return(rax)

@@ -1,0 +1,163 @@
+
+<style>
+  .memo { padding: 1rem 0; font-size: 14px; }
+  .section { margin-bottom: 1.5rem; }
+  .section-title { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 8px; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  table { width: 100%; border-collapse: collapse; }
+  td, th { padding: 5px 8px; text-align: left; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; }
+  th { font-weight: 500; color: var(--color-text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  td:first-child { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-info); white-space: nowrap; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+  .reg-row { display: flex; align-items: stretch; margin-bottom: 10px; }
+  .reg-label { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-info); width: 48px; flex-shrink: 0; display: flex; align-items: center; padding-right: 8px; }
+  .reg-bars { flex: 1; display: flex; border-radius: 6px; overflow: hidden; border: 0.5px solid var(--color-border-secondary); height: 28px; }
+  .seg { display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; font-weight: 500; }
+  .seg-64 { background: #E6F1FB; color: #0C447C; flex: 4; }
+  .seg-32 { background: #B5D4F4; color: #0C447C; flex: 3; }
+  .seg-16 { background: #85B7EB; color: #042C53; flex: 2; }
+  .seg-8 { background: #378ADD; color: #fff; flex: 1; }
+  @media (prefers-color-scheme: dark) {
+    .seg-64 { background: #042C53; color: #B5D4F4; }
+    .seg-32 { background: #0C447C; color: #85B7EB; }
+    .seg-16 { background: #185FA5; color: #E6F1FB; }
+    .seg-8 { background: #378ADD; color: #fff; }
+  }
+  .mono { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-info); }
+  .muted { color: var(--color-text-secondary); }
+  .note { font-size: 12px; color: var(--color-text-tertiary); margin-top: 6px; }
+  .instr-name { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+  .instr-desc { font-size: 13px; color: var(--color-text-secondary); }
+  .sep { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 4px 0; }
+</style>
+
+<div class="memo">
+  <div class="section">
+    <div class="section-title">Registres — anatomie</div>
+    <div class="card">
+      <div style="margin-bottom:10px; font-size:13px; color:var(--color-text-secondary);">Un registre 64 bits se découpe en sous-parties accessibles séparément :</div>
+      <div class="reg-row">
+        <div class="reg-label">rax</div>
+        <div class="reg-bars">
+          <div class="seg seg-64" style="flex:1">rax (64b)</div>
+          <div class="seg seg-32" style="flex:0.75">eax (32b)</div>
+          <div class="seg seg-16" style="flex:0.5">ax (16b)</div>
+          <div class="seg seg-8" style="flex:0.25">al</div>
+        </div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-label">rdx</div>
+        <div class="reg-bars">
+          <div class="seg seg-64" style="flex:1">rdx (64b)</div>
+          <div class="seg seg-32" style="flex:0.75">edx (32b)</div>
+          <div class="seg seg-16" style="flex:0.5">dx (16b)</div>
+          <div class="seg seg-8" style="flex:0.25">dl ← ton code</div>
+        </div>
+      </div>
+      <div class="note">Même principe pour rbx→bl, rcx→cl, rdi→dil, rsi→sil…</div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-bottom:1.5rem">
+    <div>
+      <div class="section-title">Convention d'appel (System V AMD64)</div>
+      <div class="card">
+        <table>
+          <tr><th>rôle</th><th>registre</th></tr>
+          <tr><td>rdi</td><td>1er argument</td></tr>
+          <tr><td>rsi</td><td>2ème argument</td></tr>
+          <tr><td>rdx</td><td>3ème argument</td></tr>
+          <tr><td>rax</td><td>valeur de retour</td></tr>
+        </table>
+        <div class="note">C'est le compilateur qui place les args dans ces registres avant d'appeler la fonction.</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-title">Taille mémoire — modificateurs</div>
+      <div class="card">
+        <table>
+          <tr><th>mot-clé</th><th>taille</th></tr>
+          <tr><td>byte</td><td>1 octet</td></tr>
+          <tr><td>word</td><td>2 octets</td></tr>
+          <tr><td>dword</td><td>4 octets</td></tr>
+          <tr><td>qword</td><td>8 octets</td></tr>
+        </table>
+        <div class="note">Nécessaire quand NASM ne peut pas déduire la taille seul, ex: <span class="mono">cmp byte [rdi+rax], 0</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Instructions clés</div>
+    <div class="card">
+      <table>
+        <tr><th>instruction</th><th>ce qu'elle fait</th></tr>
+        <tr>
+          <td>mov dst, src</td>
+          <td>copie src dans dst — ne lit jamais le contenu de dst</td>
+        </tr>
+        <tr>
+          <td>test a, a</td>
+          <td>ET bit-à-bit de a avec lui-même → met à jour les flags, ne stocke rien. Si a=0 : Zero Flag = 1</td>
+        </tr>
+        <tr>
+          <td>cmp a, b</td>
+          <td>calcule a-b → met à jour les flags, ne stocke rien. Si a=b : Zero Flag = 1</td>
+        </tr>
+        <tr>
+          <td>je label</td>
+          <td>"Jump if Equal" — saute si Zero Flag = 1</td>
+        </tr>
+        <tr>
+          <td>jmp label</td>
+          <td>saut inconditionnel</td>
+        </tr>
+        <tr>
+          <td>inc reg</td>
+          <td>incrémente reg de 1</td>
+        </tr>
+        <tr>
+          <td>ret</td>
+          <td>retourne à l'appelant — rax est la valeur de retour</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Sections NASM</div>
+    <div class="card">
+      <table>
+        <tr>
+          <td>global sym</td><td>rend sym visible par le linker (indispensable pour appels depuis C)</td>
+        </tr>
+        <tr>
+          <td>section .text</td><td>code exécutable</td>
+        </tr>
+        <tr>
+          <td>section .data</td><td>données initialisées (chaînes, constantes…)</td>
+        </tr>
+        <tr>
+          <td>section .bss</td><td>données non initialisées (réservation de mémoire)</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">ft_strlen — traduction mentale</div>
+    <div class="card" style="font-family: var(--font-mono); font-size: 12px; line-height: 2;">
+      <div><span style="color:var(--color-text-tertiary)">; rdi = adresse de la chaîne, rax = compteur</span></div>
+      <div><span style="color:var(--color-text-info)">mov rax, 0</span> &nbsp;<span class="muted">→ size_t rax = 0;</span></div>
+      <div><span style="color:var(--color-text-info)">.loop:</span></div>
+      <div><span style="color:var(--color-text-info)">&nbsp;cmp byte [rdi+rax], 0</span> &nbsp;<span class="muted">→ rdi[rax] == '\0' ?</span></div>
+      <div><span style="color:var(--color-text-info)">&nbsp;je .done</span> &nbsp;<span class="muted">→ si oui, sortir</span></div>
+      <div><span style="color:var(--color-text-info)">&nbsp;inc rax</span> &nbsp;<span class="muted">→ rax++</span></div>
+      <div><span style="color:var(--color-text-info)">&nbsp;jmp .loop</span></div>
+      <div><span style="color:var(--color-text-info)">.done:</span></div>
+      <div><span style="color:var(--color-text-info)">&nbsp;ret</span> &nbsp;<span class="muted">→ return rax;</span></div>
+    </div>
+  </div>
+</div>
