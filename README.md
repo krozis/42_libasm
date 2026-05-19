@@ -29,3 +29,4 @@ The goal is to create a static library `libasm.a` containing these functions, wh
 - Compile with `nasm`
 - The `-no-pie` flag is forbidden
 
+--------------
