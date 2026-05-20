@@ -79,7 +79,7 @@ int main(void)
 
         ssize_t r3 = ft_read(-1, buf1, 5);
         ssize_t r4 =    read(-1, buf2, 5);
-        printf(LABEL("ft_read bad fd   ") GREEN EQ RESET "%zd" GREEN ", errno = " RESET "%d" EXPECTED "%zd" GREEN ", errno = " RESET "%d\n", r3, errno, r4, errno);
+        printf(LABEL("ft_read bad fd   ") EQ "%zd" GREEN ", errno = " RESET "%d" EXPECTED "%zd" GREEN ", errno = " RESET "%d\n", r3, errno, r4, errno);
 
     }
 
