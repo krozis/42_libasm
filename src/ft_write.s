@@ -11,10 +11,12 @@ ft_write:                   ; three args -> rdi (fd), rsi (buf), rdx (count)
     ret                     ; else -> just return 
 
 .error:
-    mov rbx, rax            ; save the negative errcode
+    push rbx                ; save rbx and align stack (rsp)
+    mov rbx, rax            ; now we can use rbx -> save the negative errcode
     call __errno_location   ; rax = errno address
-    neg rbx;                ; make errcode positive
+    neg rbx                 ; make errcode positive
     mov [rax], ebx          ; write the positive code into errno
                             ; ebx instead of rbx since errno is an int (32bits)
+    pop rbx                 ; restore rbx
     mov rax, -1             ; return value = -1
     ret                     ; return(rax)

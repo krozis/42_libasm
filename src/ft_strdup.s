@@ -5,9 +5,10 @@ extern ft_strlen
 
 section .text
 ft_strdup:                      ; one arg -> rdi (s)
+    push rbx                    ; save rbx and align stack (rsp) for calls
     mov rbx, rdi                ; save s before any call
 
-    call ft_strlen              ; rax = ft_strlen(s)
+    call ft_strlen              ; rax = ft_strlen(s)  /  after a call, rsp is exactly where it was before, so no need to push anything now
     inc rax                     ; rax +=1 (for the final '\0')
     mov rdi, rax                ; malloc argument rdi = size
     call malloc                 ; rax = allocated pointer
@@ -27,5 +28,5 @@ ft_strdup:                      ; one arg -> rdi (s)
     jmp .copy                   ; goto .copy loop
 
 .done:
+    pop rbx                     ; restore rbx
     ret                         ; return allocated pointer or NULL
-                                                  
