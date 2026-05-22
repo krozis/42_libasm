@@ -1,7 +1,8 @@
 #ifndef LIBASM_H
 # define LIBASM_H
 
-#include <stddef.h>  // for size_t
+#include <stddef.h>     // for size_t
+#include <sys/types.h>  // for ssize_t
 
 size_t  ft_strlen(const char *str);
 char    *ft_strcpy(char *dest, const char *src);
