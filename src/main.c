@@ -41,9 +41,9 @@ int main(void)
     printf(HEADER("ft_strcmp"));
     {
         printf(LABEL("ft_strcmp(\"Hello\", \"Hello\") ") EQ "%d" EXPECTED "%d\n", ft_strcmp("Hello", "Hello"), strcmp("Hello", "Hello"));
-        printf(LABEL("ft_strcmp(\"Hello\", \"World\") ") EQ "%d" EXPECTED "%d\n", ft_strcmp("Hello", "World"), strcmp("Hello", "World"));
+        printf(LABEL("ft_strcmp(\"Hello\", \"World\") ") EQ "%d" EXPECTED LABEL("same sign as ")"%d\n", ft_strcmp("Hello", "World"), strcmp("Hello", "World"));
         printf(LABEL("ft_strcmp(\"\", \"\")           ") EQ "%d" EXPECTED "%d\n", ft_strcmp("", ""),           strcmp("", ""));
-        printf(LABEL("ft_strcmp(\"a\", \"\")          ") EQ "%d" EXPECTED "%d\n", ft_strcmp("a", ""),          strcmp("a", ""));
+        printf(LABEL("ft_strcmp(\"a\", \"\")          ") EQ "%d" EXPECTED LABEL("same sign as ")"%d\n", ft_strcmp("a", ""),          strcmp("a", ""));
     }
 
     /* ft_write */
