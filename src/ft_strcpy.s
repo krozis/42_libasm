@@ -17,3 +17,5 @@ ft_strcpy:              ; Two arguments (dest in rdi, src in rsi)
 
 .done:
     ret                 ; return rax
+
+section .note.GNU-stack noalloc noexec nowrite progbits

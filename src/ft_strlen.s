@@ -12,3 +12,5 @@ ft_strlen:                  ; One argument (s) will go to rdi
 
 .done:
     ret                     ; return(rax)
+
+section .note.GNU-stack noalloc noexec nowrite progbits
